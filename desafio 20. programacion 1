@@ -1,0 +1,52 @@
+def herramienta_educativa_ascii(numeros):
+    """
+    Toma una lista de números enteros y muestra su equivalente en caracteres ASCII.
+    """
+    print("-" * 35)
+    print(f"{'Código ASCII':^15} | {'Carácter':^15}")
+    print("-" * 35)
+    
+    for numero in numeros:
+        # Validamos que el número esté en el rango ASCII estándar/extendido (0-255)
+        if 0 <= numero <= 255:
+            caracter = chr(numero)
+            
+            # Manejo especial para caracteres que no se ven (espacios, saltos de línea, etc.)
+            if numero == 32:
+                caracter = "[Espacio]"
+            elif numero == 10:
+                caracter = "[Salto de línea]"
+            elif numero == 9:
+                caracter = "[Tabulación]"
+            elif numero < 32:
+                caracter = "[Control/No imprimible]"
+                
+            print(f"{numero:^15} | {caracter:^15}")
+        else:
+            print(f"{numero:^15} | [Fuera de rango ASCII]")
+            
+    print("-" * 35)
+
+# --- Prueba de la herramienta ---
+# Una lista con números mezclados: letras, números, símbolos y un espacio
+mi_lista = [72, 111, 108, 97, 33, 32, 50, 48, 50, 54]
+
+print("Ejecutando la herramienta educativa:")
+herramienta_educativa_ascii(mi_lista)
+            
+ 
+Ejecutando la herramienta educativa:
+-----------------------------------
+ Código ASCII   |    Carácter    
+-----------------------------------
+      72        |        H       
+      111       |        o       
+      108       |        l       
+      97        |        a       
+      33        |        !       
+      32        |    [Espacio]   
+      50        |        2       
+      48        |        0       
+      50        |        2       
+      54        |        6       
+-----------------------------------

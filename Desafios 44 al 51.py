@@ -290,6 +290,65 @@ class Personaje:
             print(f"{self.id} no tiene ninguna habilidad equipada para realizar una acción.")
 
 """TAD Personaje Decoupled (Contenedor)
+# --- DEFINICIÓN DEL TAD BIBLIOTECA ---
+
+def crear_biblioteca():
+    return []
+
+def agregar(biblioteca, titulo, autor):
+    libro = {"titulo": titulo, "autor": autor}
+    biblioteca.append(libro)
+
+def eliminar(biblioteca, titulo):
+    for libro in biblioteca:
+        if libro["titulo"].lower() == titulo.lower():
+            biblioteca.remove(libro)
+            return True
+    return False
+
+def buscar(biblioteca, titulo):
+    return [l for l in biblioteca if titulo.lower() in l["titulo"].lower()]
+
+def mostrar(biblioteca, nombre="Biblioteca"):
+    print(f"\n--- Catálogo: {nombre} ---")
+    if not biblioteca:
+        print("  (Vacía)")
+        return
+    for i, libro in enumerate(biblioteca, 1):
+        print(f'  {i}. "{libro["titulo"]}" - {libro["autor"]}')
+
+
+# --- DEMOSTRACIÓN: DOS BIBLIOTECAS ---
+
+# 1. Creamos las dos instancias independientes
+biblio_central = crear_biblioteca()
+biblio_norte = crear_biblioteca()
+
+# 2. Operaciones en Biblioteca Central
+agregar(biblio_central, "Cien años de soledad", "Gabriel García Márquez")
+agregar(biblio_central, "Don Quijote de la Mancha", "Miguel de Cervantes")
+agregar(biblio_central, "Rayuela", "Julio Cortázar")
+
+# 3. Operaciones en Biblioteca Norte
+agregar(biblio_norte, "1984", "George Orwell")
+agregar(biblio_norte, "El principito", "Antoine de Saint-Exupéry")
+agregar(biblio_norte, "Fahrenheit 451", "Ray Bradbury")
+
+# 4. Búsqueda y eliminación cruzada
+eliminar(biblio_central, "Rayuela")
+eliminar(biblio_norte, "Fahrenheit 451")
+
+# 5. Mostrar contenido final de ambas bibliotecas
+mostrar(biblio_central, "Biblioteca Central")
+mostrar(biblio_norte, "Biblioteca Norte")
+
+--- Catálogo: Biblioteca Central ---
+  1. "Cien años de soledad" - Gabriel García Márquez
+  2. "Don Quijote de la Mancha" - Miguel de Cervantes
+
+--- Catálogo: Biblioteca Norte ---
+  1. "1984" - George Orwell
+  2. "El principito" - Antoine de Saint-Exupéry
 
 DESAFIO N°46: El problema principal de gestionar un inventario de cadena minorista mediante TADs anidados (por ejemplo, que el TAD_Tienda contenga directamente una lista de TAD_Producto, una lista de TAD_Empleado y sus TAD_Transaccion) es que genera duplicación de datos, alto consumo de memoria y problemas de consistencia.
 

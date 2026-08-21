@@ -143,6 +143,102 @@ class Biblioteca:
 
     def get_multas(self):
         return self._coleccionMultas
+# --- DEFINICIÓN DEL TAD BIBLIOTECA ---
+
+def crear_biblioteca():
+    """Crea y retorna una nueva biblioteca vacía."""
+    return []
+
+def agregar_libro(biblioteca, titulo, autor):
+    """Agrega un libro a la biblioteca como un diccionario."""
+    libro = {"titulo": titulo, "autor": autor, "disponible": True}
+    biblioteca.append(libro)
+    print(f' Libro "{titulo}" agregado correctamente.')
+
+def eliminar_libro(biblioteca, titulo):
+    """Elimina un libro de la biblioteca buscando por título."""
+    for libro in biblioteca:
+        if libro["titulo"].lower() == titulo.lower():
+            biblioteca.remove(libro)
+            print(f' Libro "{titulo}" eliminado de la biblioteca.')
+            return True
+    print(f' No se pudo eliminar: El libro "{titulo}" no existe.')
+    return False
+
+def buscar_libro(biblioteca, titulo):
+    """Busca un libro por su título exacto o parcial."""
+    encontrados = [
+        l for l in biblioteca if titulo.lower() in l["titulo"].lower()
+    ]
+    if encontrados:
+        print(f'\n Resultados de búsqueda para "{titulo}":')
+        for l in encontrados:
+            estado = "Disponible" if l["disponible"] else "Prestado"
+            print(f'  - "{l["titulo"]}" de {l["autor"]} [{estado}]')
+        return encontrados
+    else:
+        print(f'\n No se encontraron libros con el título "{titulo}".')
+        return []
+
+def mostrar_libros(biblioteca):
+    """Muestra el catálogo completo de la biblioteca."""
+    print("\n Catálogo actual de la biblioteca:")
+    if not biblioteca:
+        print("  (La biblioteca está vacía)")
+        return
+    
+    for i, libro in enumerate(biblioteca, 1):
+        estado = "Disponible" if libro["disponible"] else "Prestado"
+        print(f'  {i}. "{libro["titulo"]}" - {libro["autor"]} [{estado}]')
+
+
+# --- PRUEBA DEL TAD (DEMOSTRACIÓN) ---
+
+if __name__ == "__main__":
+    # 1. Inicializar el TAD
+    mi_biblioteca = crear_biblioteca()
+
+    print("=== 1. AGREGANDO LIBROS ===")
+    agregar_libro(mi_biblioteca, "Cien años de soledad", "Gabriel García Márquez")
+    agregar_libro(mi_biblioteca, "Don Quijote de la Mancha", "Miguel de Cervantes")
+    agregar_libro(mi_biblioteca, "1984", "George Orwell")
+    agregar_libro(mi_biblioteca, "El principito", "Antoine de Saint-Exupéry")
+
+    # 2. Mostrar el catálogo inicial
+    mostrar_libros(mi_biblioteca)
+
+    print("\n=== 2. BUSCANDO UN LIBRO ===")
+    buscar_libro(mi_biblioteca, "1984")
+
+    print("\n=== 3. ELIMINANDO UN LIBRO ===")
+    eliminar_libro(mi_biblioteca, "Don Quijote de la Mancha")
+
+    # 4. Mostrar catálogo final para verificar
+    mostrar_libros(mi_biblioteca)
+    === 1. AGREGANDO LIBROS ===
+ Libro "Cien años de soledad" agregado correctamente.
+ Libro "Don Quijote de la Mancha" agregado correctamente.
+ Libro "1984" agregado correctamente.
+ Libro "El principito" agregado correctamente.
+
+ Catálogo actual de la biblioteca:
+  1. "Cien años de soledad" - Gabriel García Márquez [Disponible]
+  2. "Don Quijote de la Mancha" - Miguel de Cervantes [Disponible]
+  3. "1984" - George Orwell [Disponible]
+  4. "El principito" - Antoine de Saint-Exupéry [Disponible]
+
+=== 2. BUSCANDO UN LIBRO ===
+
+ Resultados de búsqueda para "1984":
+  - "1984" de George Orwell [Disponible]
+
+=== 3. ELIMINANDO UN LIBRO ===
+ Libro "Don Quijote de la Mancha" eliminado de la biblioteca.
+
+ Catálogo actual de la biblioteca:
+  1. "Cien años de soledad" - Gabriel García Márquez [Disponible]
+  2. "1984" - George Orwell [Disponible]
+  3. "El principito" - Antoine de Saint-Exupéry [Disponible]
 
 """DESAFIO N° 45. Para resolver este desafío en programación de videojuegos, la solución estándar en la industria es evolucionar desde TADs estáticos hacia patrones de diseño flexibles o una Arquitectura Orientada a Componentes (ECS / Composition over Inheritance)."""
 

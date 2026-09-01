@@ -1,0 +1,82 @@
+DESAFIO 18: GESTION DEL STOCK DE LA VERDULERIA
+Pregunta 1: Hay 7 tipos de productos en el inventario inicial.
+
+Pregunta 2: El producto en la tercera posición (índice 2) es "zanahorias".
+
+Explicación en Python
+En Python, las listas (arreglos) utilizan un índice basado en cero (0-indexed), por lo que las posiciones se cuentan así:
+
+inventario[0] → Posición 1: "manzanas"
+
+inventario[1] → Posición 2: "bananas"
+
+inventario[2] → Posición 3: "zanahorias"
+
+inventario[3] → Posición 4: "espinacas"
+
+inventario[4] → Posición 5: "brocoli"
+
+inventario[5] → Posición 6: "cebolla"
+
+inventario[6] → Posición 7: "kiwis"
+
+Para obtener la cantidad total de productos mediante código, usas la función len():
+inventario = ["manzanas", "bananas", "zanahorias", "espinacas", "brocoli", "cebolla", "kiwis"]
+
+# Pregunta 1: Total de elementos
+total_productos = len(inventario)
+print(f"Total de productos: {total_productos}")  # Resultado: 7
+
+# Pregunta 2: Tercer producto (índice 2)
+tercer_producto = inventario[2]
+print(f"Producto en la 3ª posición: {tercer_producto}")  # Resultado: zanahorias
+
+GESTION DEL INVENTARIO: 
+Pregunta 3: Eliminar las bananas vendidas
+Puedes usar el método .remove() especificando el nombre del producto o del usando su índice (posición 1):
+# Opción por nombre:
+inventario.remove("bananas")
+
+# O por posición (índice 1):
+# del inventario[1]
+
+Pregunta 4: Agregar nuevos productos
+Para agregar varios elementos al mismo tiempo al final de la lista, utilizas el método .extend():
+nuevos_productos = ["frutillas", "apio", "papas"]
+inventario.extend(nuevos_productos)
+
+Pregunta 5: Verificar presencia de un producto
+Usas el operador in, el cual devuelve un valor booleano (True o False):
+print("papas" in inventario)  # Devuelve: True
+
+Pregunta 6: Criterio para hacer espacio e implementación
+Como gerente, la decisión lógica dependería de negocio (eliminar el producto con menor rotación/menos ventas o el más perecedero/próximo a vencer).
+
+En Python, si decide eliminar por ejemplo el producto menos vendido (supongamos "brocoli"):
+# 1. Liberar espacio quitando un producto poco vendido
+inventario.remove("brocoli")
+
+# 2. Agregar el nuevo producto
+inventario.append("dragonfruit")
+
+Si la regla de la tienda fuera siempre descartar el producto más antiguo (el primero de la lista):
+inventario.pop(0)  # Elimina "manzanas"
+inventario.append("dragonfruit")
+
+ORDENAR EL INVENTARIO:
+
+Pregunta 7: Ordenar el inventario alfabéticamente
+Para ordenar la lista alfabéticamente modificando el inventario directamente, usas el método .sort():
+inventario.sort()
+print(inventario)
+
+Pregunta 8: Crear una copia independiente del inventario
+Si asignas la lista directamente con = (copia = inventario), ambas variables apuntarán a la misma memoria, por lo que cualquier cambio del empleado afectaría al inventario original.
+
+Para crear una copia independiente (copia superficial o shallow copy), usas el método .copy() o la sintaxis de slicing [:]:
+# Opción recomendable con el método .copy():
+inventario_empleado = inventario.copy()
+
+# Opción alternativa usando slicing [:]:
+# inventario_empleado = inventario[:]
+Si el empleado añade o elimina productos en inventario_empleado, la variable inventario original de la tienda permanecerá intacta.
